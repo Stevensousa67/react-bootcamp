@@ -14,6 +14,7 @@ function App() {
     )
 }
 
+// The code below is the Header component. It contains the title of the restaurant.
 function Header() {
     return (
         <header className='header'>
@@ -24,42 +25,51 @@ function Header() {
 
 // The code below is the Menu component. It contains the title and the Pizza component which displays the list of pizzas.
 function Menu() {
+    const numPizzas = pizzaData.length;
+
     return (
         <main className='menu'>
             <h2>Our Menu</h2>
-            <Pizza />
-            <p>All our pizzas are made with fresh ingredients and love!</p>
-        </main>
-    )
 
+            {numPizzas > 0 ? (
+                <>
+                    <ul className='pizzas'>
+                        {pizzaData.map((pizza, index) => (
+                            <Pizza pizza={pizza} key={index} />
+                        ))}
+                    </ul>
+                    <p>All our pizzas are made with fresh ingredients and love!</p>
+                </>
+            ) : (<p>We are currently working on our menu. Please come back later!</p>)}
+        </main>
+    );
 }
 
 // The code below is the Pizza component. It maps over the pizzaData array and renders a list of pizzas with their details.
-function Pizza() {
+function Pizza(props) {
     return (
-        <div className='pizzas'>
-            {pizzaData.map((pizza, index) => (
-                <div key={index} className={`pizza ${pizza.soldOut ? "sold-out" : ""}`}>
-                    <img src={pizza.photoName} alt={pizza.name} />
-                    <div>
-                        <h3>{pizza.name}</h3>
-                        <p>{pizza.ingredients}</p>
-                        <span>{pizza.soldOut ? "Sold Out" : `$${pizza.price}`}</span>
-                    </div>
-                </div>
-            ))}
-        </div>
+        <li className='pizza'>
+            <img src={props.pizza.photoName} alt={props.pizza.name} />
+            <div>
+                <h3>{props.pizza.name}</h3>
+                <p>{props.pizza.ingredients}</p>
+                <span>{props.pizza.price}</span>
+            </div>
+        </li>
     );
 }
 
 // The code below is the Footer component. It displays the current status of the restaurant (open or closed) based on the current hour.
 function Footer() {
     const hour = new Date().getHours();
-    const open = hour >= 12 && hour <= 22;
-    const openText = open ? "We are open!" : `We are currently closed! Please come back in ${12 - hour} hours and ${60 - new Date().getMinutes()} minutes.`;
+    const open = hour >= 12 && hour < 21;
+    const openText = open ? "We're open until 22:00. Come visit us or order online." : `We are currently closed! Please come back in ${Math.abs((12 - hour))} hours and ${60 - new Date().getMinutes()} minutes.`;
     return (
         <footer className='footer'>
-            {openText}
+            <div className="order">
+                <p>{openText}</p>
+                {open ? <button className='btn'>Order Now</button> : null}
+            </div>
         </footer>
     )
 }
