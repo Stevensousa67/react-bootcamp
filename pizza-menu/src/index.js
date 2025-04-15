@@ -33,6 +33,8 @@ function Menu() {
 
             {numPizzas > 0 ? (
                 <>
+                    <p>Authentic Italian cousine. 6 creative dishes to choose from. All from our stone oven, all organic, all delicious.</p>
+                    
                     <ul className='pizzas'>
                         {pizzaData.map((pizza, index) => (
                             <Pizza pizzaObj={pizza} key={index} />
@@ -48,12 +50,12 @@ function Menu() {
 // The code below is the Pizza component. It maps over the pizzaData array and renders a list of pizzas with their details.
 function Pizza({pizzaObj}) {
     return (
-        <li className='pizza'>
+        <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
             <img src={pizzaObj.photoName} alt={pizzaObj.name} />
             <div>
                 <h3>{pizzaObj.name}</h3>
                 <p>{pizzaObj.ingredients}</p>
-                <span>{pizzaObj.price}</span>
+                <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
             </div>
         </li>
     );
