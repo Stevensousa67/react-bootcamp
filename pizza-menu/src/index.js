@@ -35,7 +35,7 @@ function Menu() {
                 <>
                     <ul className='pizzas'>
                         {pizzaData.map((pizza, index) => (
-                            <Pizza pizza={pizza} key={index} />
+                            <Pizza pizzaObj={pizza} key={index} />
                         ))}
                     </ul>
                     <p>All our pizzas are made with fresh ingredients and love!</p>
@@ -46,14 +46,14 @@ function Menu() {
 }
 
 // The code below is the Pizza component. It maps over the pizzaData array and renders a list of pizzas with their details.
-function Pizza(props) {
+function Pizza({pizzaObj}) {
     return (
         <li className='pizza'>
-            <img src={props.pizza.photoName} alt={props.pizza.name} />
+            <img src={pizzaObj.photoName} alt={pizzaObj.name} />
             <div>
-                <h3>{props.pizza.name}</h3>
-                <p>{props.pizza.ingredients}</p>
-                <span>{props.pizza.price}</span>
+                <h3>{pizzaObj.name}</h3>
+                <p>{pizzaObj.ingredients}</p>
+                <span>{pizzaObj.price}</span>
             </div>
         </li>
     );
