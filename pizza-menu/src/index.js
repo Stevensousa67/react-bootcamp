@@ -64,7 +64,7 @@ function Pizza({pizzaObj}) {
 // The code below is the Footer component. It displays the current status of the restaurant (open or closed) based on the current hour.
 function Footer() {
     const hour = new Date().getHours();
-    const open = hour >= 12 && hour < 21;
+    const open = hour >= 12 && hour < 22;
     const openText = open ? "We're open until 22:00. Come visit us or order online." : `We are currently closed! Please come back in ${Math.abs((12 - hour))} hours and ${60 - new Date().getMinutes()} minutes.`;
     return (
         <footer className='footer'>
