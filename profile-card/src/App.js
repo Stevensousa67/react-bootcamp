@@ -1,5 +1,38 @@
 import './App.css';
 
+const skills = [
+  {
+    skill: 'HTML & CSS',
+    level: 'Advanced',
+    color: '#2662EA'
+  },
+  {
+    skill: 'JavaScript',
+    level: 'Intermediate',
+    color: '#EFD81D'
+  },
+  {
+    skill: 'Web Design',
+    level: 'Intermediate',
+    color: 'C3DCAF'
+  },
+  {
+    skill: 'Git and GitHub',
+    level: 'Intermediate',
+    color: '#E84F33'
+  },
+  {
+    skill: 'React',
+    level: 'Beginner',
+    color: '#60DAFB'
+  },
+  {
+    skill: 'Next.js',
+    level: 'Beginner',
+    color: '#E84F33'
+  }
+]
+
 function App() {
   return (
     <div className="card">
@@ -30,11 +63,15 @@ function Intro() {
 }
 
 // The Skill component displays a single skill of the user.
-function Skill(props){
+function Skill({skill}){
   return (
-    <div className='skill' style={{backgroundColor: props.color}}>
-      <span>{props.skill}</span>
-      <span>{props.emoji}</span> 
+    <div className='skill' style={{backgroundColor: skill.color}}>
+      <span>{skill.skill}</span>
+      <span>
+        {skill.level === "Beginner" && '👶🏻' }
+        {skill.level === "Intermediate" && '👍🏻' }
+        {skill.level === "Advanced" && '💪🏻' }
+      </span> 
     </div>
   )
 }
@@ -43,11 +80,9 @@ function Skill(props){
 function SkillList() {
   return (
     <div className='skill-list'>
-      <Skill skill='HTML & CSS' emoji='👷🏻' color='red'/>
-      <Skill skill='JavaScript' emoji='🪄' color='yellow'/>
-      <Skill skill='Next.js' emoji='🚀' color='silver'/>
-      <Skill skill='React' emoji='💪🏻' color='lightblue'/>
-      <Skill skill='Tailwind CSS' emoji='💄' color='green'/>
+      {skills.map((skill, index) => (
+        <Skill key={index} skill={skill} />
+      ))}
     </div>
   )
 }
