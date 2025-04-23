@@ -61,7 +61,7 @@ function DateDisplay({ count }) {
             ? `Today is ${dateString}`
             : count > 0
             ? `${count} days from today will be ${dateString}`
-            : `${count} days from today was ${dateString}`}
+            : `${count} days ago was ${dateString}`}
         </span>
     </div>
   );
